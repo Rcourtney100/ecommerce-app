@@ -1,0 +1,2 @@
+class AddEmailToUser < ApplicationRecord
+end
