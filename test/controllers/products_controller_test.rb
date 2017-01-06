@@ -1,0 +1,19 @@
+require 'test_helper'
+
+class ProductControllerTest < ActionDispatch::IntegrationTest
+  test "should get indexdestroy" do
+    get product_indexdestroy_url
+    assert_response :success
+  end
+
+  test "should get create" do
+    get product_create_url
+    assert_response :success
+  end
+
+  test "should get show" do
+    get product_show_url
+    assert_response :success
+  end
+
+end

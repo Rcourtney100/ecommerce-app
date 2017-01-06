@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>EcommerceApp</title>
-    <%= csrf_meta_tags %>
+    <title>Food for People</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<%= csrf_meta_tags %>
+
+<!-- this is needed to show pictures that are stored in your project -->
+<%= image_tag 'link in local folder to picture' %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -10,11 +14,15 @@
 
   <body>
   <header>
-			<nav class="navbar-fixed-top">
+			<nav class="navbar-fixed-top align-center">
+
+
 				<a href="/"><button class="nav-button" type="button">Home</button></a>
-				<a href="/sign_up"><button class="nav-button" type="button">Sign Up</button></a>
-				<a href="/log_in"><button class="nav-button" type="button">Log In</button></a>
+				<a href="/signup"><button class="nav-button" type="button">Sign Up</button></a>
+				<a href="/login"><button class="nav-button" type="button">Log In</button></a>
 				<a href="/cart"><button class="nav-button" type="button">Cart</button></a>
+        <%= link_to "cart", cart_path(current_user.cart) if current_user %>
+        <a href="/products"><button class="nav-button" type="button">Our Products</button></a>
 				<form><input type="search" class="search-field">Search Products</form></a>
 			</nav>
 </header>

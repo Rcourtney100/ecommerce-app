@@ -1,0 +1,14 @@
+<h1>Our Products</h1>
+	 
+<% @products.each do |product| %>
+
+
+
+<div class="card">
+		<h4><a href="/products/<%= product.id %>"><%= product.description %></a></h4>
+		
+</div>
+
+<br>
+
+<% end %>
