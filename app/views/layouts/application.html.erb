@@ -6,7 +6,7 @@
 <%= csrf_meta_tags %>
 
 <!-- this is needed to show pictures that are stored in your project -->
-<%= image_tag 'link in local folder to picture' %>
+
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -14,14 +14,15 @@
 
   <body>
   <header>
-			<nav class="navbar-fixed-top align-center">
+			<nav class="navbar">
 
 
 				<a href="/"><button class="nav-button" type="button">Home</button></a>
 				<a href="/signup"><button class="nav-button" type="button">Sign Up</button></a>
 				<a href="/login"><button class="nav-button" type="button">Log In</button></a>
-				<a href="/cart"><button class="nav-button" type="button">Cart</button></a>
-        <%= link_to "cart", cart_path(current_user.cart) if current_user %>
+        <% unless current_user.cart.nil? %>
+        <%= link_to "cart", cart_path(current_user.cart.id) if current_user %>
+        <% end %>
         <a href="/products"><button class="nav-button" type="button">Our Products</button></a>
 				<form><input type="search" class="search-field">Search Products</form></a>
 			</nav>
