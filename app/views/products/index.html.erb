@@ -1,12 +1,15 @@
 <h1>Our Products</h1>
 	 
-<% @products.each do |product| %>
 
 
 
-<div class="card">
-		<h4><a href="/products/<%= product.id %>"><%= product.description %></a></h4>
-		
+<div class="products">
+	<% @products.each do |product| %>
+	
+		<h4><a href="/products/<%= product.id %>">
+		<%= product.description %></a></h4>
+		<img src="http://lorempixel.com/400/200" />
+
 </div>
 
 <br>

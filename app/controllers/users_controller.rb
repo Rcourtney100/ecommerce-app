@@ -3,14 +3,21 @@ class UsersController < ApplicationController
 before_action :set_user, only: [:show, :edit, :update, :destroy]
 
 
+
   def index
   end
 
   def create
-    @user = User.create(user_params) 
+    @user = User.new(user_params) 
+    if @user.save
     Cart.create(user_id: @user.id)
+    session[:user_id] = @user.id
     redirect_to @user 
+  else 
+    flash[:notice] = "User already created"
+    render new_user_path
   end
+end
 
   def edit
   
@@ -32,6 +39,7 @@ before_action :set_user, only: [:show, :edit, :update, :destroy]
   end
 
   def new
+    @user = User.new
   end
 
 private
@@ -40,6 +48,10 @@ def user_params
   params.require(:user).permit(:fname, :lname, :address, :email, 
     :password)
 end
+
+def create_users_cart
+  Cart.create(user_id: @user_id)
+end  
 
 def set_user
 

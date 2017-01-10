@@ -21,12 +21,18 @@
 				<a href="/signup"><button class="nav-button" type="button">Sign Up</button></a>
 				<a href="/login"><button class="nav-button" type="button">Log In</button></a>
         <% unless current_user.cart.nil? %>
-        <%= link_to "cart", cart_path(current_user.cart.id) if current_user %>
+        <%= link_to "Cart", cart_path(current_user.cart.id) if current_user %>
         <% end %>
         <a href="/products"><button class="nav-button" type="button">Our Products</button></a>
-				<form><input type="search" class="search-field">Search Products</form></a>
+				<%= form_tag(products_path, :method => "get", id: "search-form") do %>
+        <%= text_field_tag :search, params[:search], placeholder: "Search Products" %>
+        <%= submit_tag "Search", :name => nil %>
+<% end %>
 			</nav>
 </header>
+
     <%= yield %>
   </body>
+
+
 </html>

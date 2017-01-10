@@ -1,4 +1,22 @@
-<h1><%= @product.description %></h1>
 
+
+
+<div class="large-card">
+	<h1><%= @product.description %></h1>
+	
+	
+	<% if current_user %>
+		<%= form_tag "/add_to_wishlist/#{@product.id}" do %>
+		  <%= submit_tag ("Add to Wishlist") %>
+		<% end %>
+
+		<%= form_tag "/add_to_cart/#{@product.id}" do %>
+		  <%= submit_tag ("Add to Cart") %>
+		<% end %>
+	<% else %>
+		<p>Already have an account? <%= link_to "Log in!", login_path %></p>
+		<p>New user? <%= link_to "Sign up now!", signup_path %></p>
+	<% end %>
+</div>
 
 
