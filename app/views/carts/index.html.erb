@@ -1,2 +1,4 @@
-<h1>Cart#index</h1>
-<p>Find me in app/views/cart/index.html.erb</p>
+<h1>Cart</h1>
+<% if !current_user %>
+  <a href="/users">Log in to access cart!</a>
+<% end %>

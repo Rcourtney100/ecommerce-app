@@ -1,2 +1,52 @@
-<h1>User#edit</h1>
-<p>Find me in app/views/user/edit.html.erb</p>
+<h1>Edit Your Account info</h1>
+
+<div>
+	<%= form_for @user do |f| %>
+
+		<div class="row">
+			<div class="col-sm-2">
+				<%= f.label :fname, "First Name: " %>
+			</div>
+			<div class="col-sm-3">
+				<%= f.text_field :fname %>
+			</div>
+			<div class="col-sm-2">
+				<%= f.label :lname, "Last Name: " %>
+			</div>
+			<div class="col-sm-5">
+				<%= f.text_field :lname %>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-sm-2">
+				<%= f.label :email, "Email: " %>
+			</div>
+			<div class="col-sm-3">
+				<%= f.text_field :email %>
+			</div>
+			<div class="col-sm-2">
+				<%= f.label :password, "Password: " %>
+			</div>
+			<div class="col-sm-5">
+				<%= f.text_field :password %>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12 text-left">
+				<%= f.submit "Update Info" %>
+			</div>
+		</div>
+	<% end %>
+</div>
+
+
+<h2>Delete Your Account</h2>
+<div class="row">
+	<div class="col-sm-5">
+		<p><%= link_to "Delete My Account", @user, method: :delete, data: { confirm: "Please confirm" } %> </p>
+	</div>
+
+</div>

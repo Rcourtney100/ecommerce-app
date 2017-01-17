@@ -1,2 +1,4 @@
-<h1>Wishlist#index</h1>
-<p>Find me in app/views/wishlist/index.html.erb</p>
+<h2>Wishlist</h2>
+<% if !current_user %>
+  <a href="/users">Log in to see your wishlist!</a>
+<% end %>

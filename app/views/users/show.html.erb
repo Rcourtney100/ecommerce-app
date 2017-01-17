@@ -1,2 +1,76 @@
-<h1>User#show</h1>
-<p>Find me in app/views/user/show.html.erb</p>
+<div>
+	<h2>Welcome, <%= @user.fname %>!</h2>
+</div>
+
+<div class="row">
+
+	<% if current_user %>
+		<h3>Your Cart</h3>
+		<div class="col-sm-8">
+			<% @cart.products.each do |product| %>
+				<div class="row">
+					<div class="col-sm-1">
+						<%= form_tag "/carts/delete_from_cart/" do %>
+						<%= hidden_field_tag :product_id, product.id %>
+						<%= submit_tag ("Remove")%>
+						<% end %>
+					</div>
+	
+					<div class="col-sm-4">
+						<%= product.description %>
+					</div>
+					<div class="col-sm-8">
+						<p> </p>
+					</div>
+
+				</div>
+			<% end %>
+		
+
+			<div class="row">
+				<div class="col-sm-5">
+					<p>Total: </p>
+				</div>
+				<div class="col-sm-6">
+					<%= form_tag "/carts/check_out/" do %>
+					<%= submit_tag ("Check Out")%>
+					<% end %>
+				</div>
+
+			</div>
+		</div>
+	<% end %>
+
+	<% if current_user %>
+		<div class="col-sm-4">
+			<h4>Name: <%= @user.fname %>
+			<%= @user.lname %></h4>
+			<p>Email: <%= @user.email %>
+			<%= @user.password %></p>
+			
+			<p><a href='/users/<%= "#{session[:user_id]}" %>/edit'>Edit Your Account</a></p>
+
+			<%= form_tag '/users/destroy' do%>
+			<%= submit_tag ("Log Out") %>
+			<% end %>
+		</div>
+	<% end %>
+</div>
+
+<div class="row">
+	<% if current_user %>
+	  <h3>Your Wishlist</h3>
+		<% @wishlist.products.each do |product| %>
+			<div class="col-sm-3">
+				<h4><%= product.description %></h4>
+				<img src="http://lorempixel.com/350/450/nature">
+				<div class="btn">
+				<%= form_tag "/wishlists/delete_from_wishlist/" do %>
+					<%= hidden_field_tag :product_id, product.id %>
+			  		<%= submit_tag ("Remove from Wishlist")%>
+				<% end %>
+				</div>
+			</div>
+		<% end %>
+	<% end %>
+</div>

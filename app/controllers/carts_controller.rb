@@ -12,8 +12,6 @@ class CartsController < ApplicationController
   end
 
   def show
-
-    @number_items = @cart.products.length
   end
 
   def destroy
@@ -40,24 +38,24 @@ class CartsController < ApplicationController
     redirect_to @user.cart
   end
 
-  def remove_all_products_from_cart
-
-    @user = User.find(session[:user_id])
-    @user.cart.products = []
-    redirect_to @user.cart
-  end
 
   def remove_from_cart
     @user = User.find(session[:user_id])
     @product = Product.find(params[:product_id]) 
     @user.cart.products.delete(@product)
-    redirect_to @user.cart
+    redirect_to @user
   end
+
+  def check_out
+    @user = User.find(session[:user_id])
+    @user.cart.products =[]
+    redirect_to @user.cart
+ end   
 
 private
 
-  def order_params
-    params.require(:cart).permit(:user_id)
+  def cart_params
+    params.require(:user).permit(:user_id, :product_)
   end
 
   def set_cart

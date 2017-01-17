@@ -1,37 +1,78 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Food for People</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>Food For People</title>
 <%= csrf_meta_tags %>
-
-<!-- this is needed to show pictures that are stored in your project -->
 
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   </head>
 
   <body>
-  <header>
-			<nav class="navbar">
+    <div class="container-fluid">
 
+  <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Food for People</a>
+    </div>
 
-				<a href="/"><button class="nav-button" type="button">Home</button></a>
-				<a href="/signup"><button class="nav-button" type="button">Sign Up</button></a>
-				<a href="/login"><button class="nav-button" type="button">Log In</button></a>
-        <% unless current_user.cart.nil? %>
-        <%= link_to "Cart", cart_path(current_user.cart.id) if current_user %>
-        <% end %>
-        <a href="/products"><button class="nav-button" type="button">Our Products</button></a>
-				<%= form_tag(products_path, :method => "get", id: "search-form") do %>
-        <%= text_field_tag :search, params[:search], placeholder: "Search Products" %>
-        <%= submit_tag "Search", :name => nil %>
-<% end %>
-			</nav>
-</header>
+  
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><a href="/products">Our Products</a></li>
+        </ul>
+      
+        <form class="navbar-form navbar-left">  
+          <div class="form-group">
+ 
+              <%= form_tag(products_path, :method => "get", id: "search-form") do %>
+              <%= text_field_tag :search, params[:search], placeholder: "Search Products" %>
 
-    <%= yield %>
+            <div class="btn">
+              <%= submit_tag "Search", :name => nil %>
+              <% end %>
+            </div>
+          </div>
+        </form>
+      
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <% if !current_user %>
+              <a href="/users">Log in or Sign up</a>
+            <% end %> 
+
+            <% if current_user %>
+             <a href="/users/<%= "#{session[:user_id]}" %>">Your Account</a>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    
+    <div id="wrapper"> 
+      <% flash.each do |name, msg| -%>
+        <%= content_tag :div, msg, class: name %>
+      <% end -%>
+    
+      <% if !current_user %>
+        <h2 class="text-center">Log in to Start Shopping</h2>
+      <% end %> 
+
+      <%= yield %>
+
+    </div>
+  </div>
   </body>
 
 

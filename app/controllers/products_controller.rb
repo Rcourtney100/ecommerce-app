@@ -9,6 +9,8 @@ class ProductsController < ApplicationController
 end
 
   def create
+    @product = Product.create(product_params)
+    redirect_to @product
   end
 
   def show
@@ -19,11 +21,25 @@ end
   end
   	
   def new
+    @product = Product.new
   end
 
   def edit
   end
 
   def update
+    @product.update
+    redirect_to @product
   end	
+
+private
+
+  def product_params
+    params.require(:user).permit(:description)
+  end
+
+  def set_product
+    @product = Product.find(params[:id])
+  end
+
 end

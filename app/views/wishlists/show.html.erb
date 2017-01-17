@@ -1,2 +1,7 @@
-<h1>Wishlist#show</h1>
-<p>Find me in app/views/wishlist/show.html.erb</p>
+<h2>Wishlist#show</h2>
+
+<% @wishlist.products.each do |product| %>
+	<%= product.description %>
+	
+	<img src="http://lorempixel.com/350/450/nature">>
+<% end %>
