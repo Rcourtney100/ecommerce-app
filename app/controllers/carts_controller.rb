@@ -39,7 +39,7 @@ class CartsController < ApplicationController
   end
 
 
-  def remove_from_cart
+  def delete_from_cart
     @user = User.find(session[:user_id])
     @product = Product.find(params[:product_id]) 
     @user.cart.products.delete(@product)

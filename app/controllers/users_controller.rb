@@ -47,7 +47,7 @@ private
 
 def user_params
   params.require(:user).permit(:fname, :lname, :address, :email, 
-    :password)
+    :password, :password_confirmation)
 end
 
 def set_user
